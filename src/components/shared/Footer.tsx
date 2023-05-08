@@ -6,7 +6,7 @@ import logo from '../../../public/silverbird-cinemas.svg'
 const Footer = () => {
     const d = new Date;
   return (
-    <footer className='py-4 w-full  gap-3 bg-gradient-to-b from-slate-100 to-slate-500 text-black  bottom-0 md:px-56'>
+    <footer className='py-4 w-full  gap-3 bg-gradient-to-b from-slate-100 to-slate-500 text-black bottom-0 md:px-56 mt-5'>
        <div className=' grid grid-cols-1 md:flex gap-20 py-5'>
           <div className=' px-3'>
               <Image src={logo} alt="Silverbird Cinemas" className="h-[80px] w-[200px] my-4 "></Image>
