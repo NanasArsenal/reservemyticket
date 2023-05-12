@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google';
-import { useState, useEffect ,ReactNode} from 'react';
-import Link from 'next/link';
-import axios from 'axios';
-import Loading from '@/components/shared/Loading';
-
+import {ReactNode,Suspense} from 'react';
+import Loading from '../loading';
+import dynamic from 'next/dynamic'
+const NowShowing = dynamic(() => import('../components/nowShowing'), {
+    ssr: false,
+})
 const inter = Inter({ subsets: ['latin'] })
 
 export type Movie ={
@@ -19,47 +20,21 @@ showDate:string,
 
 export default function Home(props:{children: ReactNode}) {
   
-  const [movies,setMovies] = useState<Movie[]>([])
-  const getMovies = ():void =>{
-    axios.get('https://ticketreservationserver-production.up.railway.app/movies')
-  .then(function (response) {
-    // handle success
-    setMovies(response.data);
-    console.log(movies);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  };
 
-  useEffect(() => {
-    getMovies();
-  })
   
   return (
       <main
-        className={` p-10 h-screen ${inter.className}`}
+        className={` p-10 h-screen ${inter.className} `}
       >
         <div className=' w-full h-screen'>
             <h2 className='font-bold text-xl font-roboto'>NOW SHOWING</h2>
-          
-              <div className='w-full py-10 px-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5  '>
-                  {
-                    movies.map(movie =>{
-                      return (
-                        <Link href={'/movieDetails'} key={movie?._id}>
-                          <div  className='h-full bg-slate-100 w-full p-4 rounded-md shadow-lg'>
-                              <img src={movie.poster} alt="jj" className=''/>
-                              <h1 className='text-black'>{movie?.title}</h1>
-                          </div>
-                        </Link>
-                      )
-                    })
-                  }
-                </div>
-            </div>
+                <Suspense fallback={<p>Loading feed...</p>}>
+                  <NowShowing/>
+                </Suspense>
+       </div>
       </main>
  
   )
 }
+
+
