@@ -24,7 +24,7 @@ interface MyContextValue {
   const MovieContext = createContext(initialContextValue);
   
   // Create a custom hook to access the context value
-const useMovieContext = () => useContext(MovieContext);
+export const useMovieContext = () => useContext(MovieContext);
   
 
 
@@ -41,6 +41,7 @@ export const MovieContextProvider = (props:{children: ReactNode}) => {
 
     const updateMovie = (newData: Movie) => {
         setMovie(newData);
+        console.log(newData);
       };
 
      

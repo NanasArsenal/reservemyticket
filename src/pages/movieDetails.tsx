@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { useMovieContext } from '@/context/MovieContext';
 
 const movieDetails = () => {
   return (
-    <div>movieDetails</div>
+    <div className='w-full h-screen'>
+      movieDetails
+    </div>
   )
 }
 

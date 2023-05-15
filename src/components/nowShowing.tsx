@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import { Movie } from '@/pages';
 import Link from 'next/link';
+import { useMovieContext } from '@/context/MovieContext';
 
 
 const NowShowing = () => {
@@ -18,15 +19,12 @@ const NowShowing = () => {
       console.log(error);
     })
     };
-    async function Wait(){
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-    }
   
     useEffect(() => {
-      getMovies();
-      Wait();
+        getMovies();
     })
 
+    const {movie,updateMovie} = useMovieContext()
   
   return (
     <div className='w-full py-10 px-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5  '>
@@ -34,7 +32,10 @@ const NowShowing = () => {
                     movies.map(movie =>{
                       return (
                        
-                               <Link href={'/movieDetails'} key={movie?._id}>
+                               <Link href={'/movieDetails'} key={movie?._id} onClick={()=>{
+                                    updateMovie(movie);
+                                
+                               }}>
                                   <div  className='h-full bg-slate-100 w-full p-4 rounded-md shadow-lg'>
                                       <img src={movie.poster} alt="jj" className=''/>
                                       <h1 className='text-black'>{movie?.title}</h1>
