@@ -14,7 +14,10 @@ export type Movie ={
 poster:string,
 prologue:string,
 createdDate:string,
-ticketDetails: object,
+ticketDetails: {
+  qty: number,
+  price: number,
+},
 showDate:string,
 }
 

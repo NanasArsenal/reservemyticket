@@ -12,7 +12,6 @@ const NowShowing = () => {
     .then(function (response) {
       // handle success
       setMovies(response.data);
-      console.log(movies);
     })
     .catch(function (error) {
       // handle error
@@ -20,9 +19,16 @@ const NowShowing = () => {
     })
     };
   
+   
     useEffect(() => {
+      if(movies.length == 0){
         getMovies();
+      }
+      console.log(movies)
+  
     })
+    
+    // console.log(movies);
 
     const {movie,updateMovie} = useMovieContext()
   

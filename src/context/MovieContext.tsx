@@ -15,7 +15,10 @@ interface MyContextValue {
     poster:"",
     prologue:"string",
     createdDate:"string",
-    ticketDetails: {},
+    ticketDetails: {
+      qty: 0,
+      price: 0
+    },
     showDate:"string",
     },
     updateMovie: () => {},
@@ -35,13 +38,17 @@ export const MovieContextProvider = (props:{children: ReactNode}) => {
     poster:"",
     prologue:"string",
     createdDate:"string",
-    ticketDetails: {},
+    ticketDetails: {
+      qty: 0,
+      price: 0
+    },
     showDate:"string",
     });
 
     const updateMovie = (newData: Movie) => {
         setMovie(newData);
         console.log(newData);
+        sessionStorage.setItem('movie', JSON.stringify(newData))
       };
 
      
