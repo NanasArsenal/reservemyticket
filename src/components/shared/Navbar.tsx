@@ -11,7 +11,6 @@ const Navbar = () => {
         {/*Desktop Menu */}
         <div className="desktop-menu hidden md:hidden lg:flex w-[50%] lg:space ml-60 text-blue-400 font-oswald font-light pt-3 justify-between">
             <Link href={'/'} className="hover:font-normal hover:border-b-4 hover:border-blue-400 ">Home</Link>
-            <Link href={'/about'} className="hover:font-normal hover:border-b-4 hover:border-blue-400 ">About_Us</Link>
             <Link href={'/showing'} className="hover:font-normal hover:border-b-4 hover:border-blue-400">NowShowing</Link>
             <Link href={'/comingSoon'} className="hover:font-normal hover:border-b-4 hover:border-blue-400">ComingSoon</Link>
             <Link href={'/bookaticket'} className="hover:font-normal hover:border-b-4 hover:border-blue-400">Book_Movie_Ticket</Link>
