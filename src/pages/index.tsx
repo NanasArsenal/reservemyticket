@@ -1,7 +1,8 @@
-import Image from 'next/image'
+import {Suspense} from 'react'
+import { Spinner } from 'evergreen-ui';
 import { Inter } from 'next/font/google';
-import {ReactNode,Suspense} from 'react';
-import Loading from '../loading';
+import {ReactNode} from 'react';
+import Loading from '@/loading';
 import dynamic from 'next/dynamic'
 const NowShowing = dynamic(() => import('../components/nowShowing'), {
     ssr: false,
@@ -31,7 +32,7 @@ export default function Home(props:{children: ReactNode}) {
       >
         <div className=' w-full h-screen'>
             <h2 className='font-bold text-xl font-roboto'>NOW SHOWING</h2>
-                <Suspense fallback={<p>Loading feed...</p>}>
+                <Suspense fallback={<Loading/>}>
                   <NowShowing/>
                 </Suspense>
        </div>

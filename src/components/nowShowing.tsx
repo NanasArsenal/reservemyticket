@@ -3,12 +3,13 @@ import axios from 'axios';
 import { Movie } from '@/pages';
 import Link from 'next/link';
 import { useMovieContext } from '@/context/MovieContext';
+import { Spinner } from 'evergreen-ui';
 
 
 const NowShowing = () => {
     const [movies,setMovies] = useState<Movie[]>([])
-    const getMovies = ():void =>{
-      axios.get('https://ticketreservationserver-production.up.railway.app/movies')
+    const getMovies = async () =>{
+     await axios.get('https://ticketreservationserver-production.up.railway.app/movies')
     .then(function (response) {
       // handle success
       setMovies(response.data);
@@ -31,6 +32,11 @@ const NowShowing = () => {
     // console.log(movies);
 
     const {movie,updateMovie} = useMovieContext()
+    while (movies.length == 0) {
+      return (<div className='flex justify-center'>
+          <Spinner></Spinner>
+        </div>)
+    }
   
   return (
     <div className='w-full py-10 px-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5  '>

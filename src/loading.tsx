@@ -1,8 +1,9 @@
 import React from 'react'
+import { Spinner } from 'evergreen-ui'
 
 const Loading = () => {
   return (
-    <div>Loading</div>
+    <Spinner></Spinner>
   )
 }
 

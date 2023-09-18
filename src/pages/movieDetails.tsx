@@ -11,6 +11,8 @@ const MovieDetails = () => {
   useEffect(() => {
     
     setData(JSON.parse(sessionStorage.getItem('movie') as string))
+    console.log('movie',data)
+
   },[movie])
   console.log('movie',data)
 
