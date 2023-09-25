@@ -42,19 +42,22 @@ const NowShowing = () => {
     <div className='w-full py-10 px-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5  '>
                   {
                     movies.map(movie =>{
-                      return (
+                      if(movie.status == "showing"){
+                        return (
                        
-                               <Link href={'/movieDetails'} key={movie?._id} onClick={()=>{
-                                    updateMovie(movie);
-                                
-                               }}>
-                                  <div  className='h-full bg-slate-100 w-full p-4 rounded-md shadow-lg'>
-                                      <img src={movie.poster} alt="jj" className=''/>
-                                      <h1 className='text-black'>{movie?.title}</h1>
-                                  </div>
-                               </Link>
+                          <Link href={'/movieDetails'} key={movie?._id} onClick={()=>{
+                               updateMovie(movie);
+                           
+                          }}>
+                             <div  className='h-full bg-slate-100 w-full p-4 rounded-md shadow-lg'>
+                                 <img src={movie.poster} alt="jj" className=''/>
+                                 <h1 className='text-black'>{movie?.title}</h1>
+                             </div>
+                          </Link>
+                
+                 )
+                      }
                      
-                      )
                     })
                   }
                 </div>

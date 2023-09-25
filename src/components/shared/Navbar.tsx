@@ -36,11 +36,11 @@ const Navbar = () => {
           display: 'flex',
           flex: '1',
           flexDirection: 'column',
-          background: "#f3f4f6"
+          background: ""
         }}
     >
       <Pane backgroundColor='#f3f4f6' height="max-content">
-                 <div className=" mt-[100px] flex text-black justify-center  bg-gray-100 z-50 ">
+                 <div className=" mt-[100px] flex text-black justify-center h-screen  bg-gray-100 z-50 ">
                     <ul className="flex flex-col text-center gap-4 text-[#0EA5E9] ">
                         <Link href='/'   onClick={() => setShowMenu(false)} className="hover:font-normal text-[#0EA5E9]">Home</Link>
                         <Link href='/showing'  onClick={() => setShowMenu(false)} className="hover:font-normal text-[#0EA5E9] ">NowShowing</Link>

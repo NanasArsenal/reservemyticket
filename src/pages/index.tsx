@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export type Movie ={
   _id: string,
+  status: string,
   title:string,
 poster:string,
 prologue:string,
@@ -18,6 +19,7 @@ createdDate:string,
 ticketDetails: {
   qty: number,
   price: number,
+  sold:number,
 },
 showDate:string,
 }
