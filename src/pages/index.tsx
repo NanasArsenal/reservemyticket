@@ -1,11 +1,13 @@
 import {Suspense} from 'react'
-import { Spinner } from 'evergreen-ui';
 import { Inter } from 'next/font/google';
 import {ReactNode} from 'react';
 import Loading from '@/loading';
 import dynamic from 'next/dynamic'
 const NowShowing = dynamic(() => import('../components/nowShowing'), {
     ssr: false,
+})
+const ComingSoon = dynamic(() => import('../components/comingSoon'), {
+  ssr: false,
 })
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,6 +39,9 @@ export default function Home(props:{children: ReactNode}) {
                 <Suspense fallback={<Loading/>}>
                   <NowShowing/>
                 </Suspense>
+            <h2 className='font-bold text-xl font-roboto'>PREMIEREING SOON</h2>
+              <ComingSoon/>
+
        </div>
       </main>
  
