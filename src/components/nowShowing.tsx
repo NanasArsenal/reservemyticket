@@ -39,7 +39,7 @@ const NowShowing = () => {
     }
   
   return (
-    <div className='w-full py-10 px-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5  '>
+    <div className='w-full h-full py-10 px-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5  '>
                   {
                     movies.map(movie =>{
                       if(movie.status == "showing"){
@@ -49,9 +49,9 @@ const NowShowing = () => {
                                updateMovie(movie);
                            
                           }}>
-                             <div  className='h-full bg-slate-100 w-full p-4 rounded-md shadow-lg'>
+                             <div  className='h-full bg-slate-100 w-full p-4 rounded-md shadow-lg flex flex-col justify-between'>
                                  <img src={movie.poster} alt="jj" className=''/>
-                                 <h1 className='text-black'>{movie?.title}</h1>
+                                 <h1 className='text-black font-semibold'>{movie?.title}</h1>
                              </div>
                           </Link>
                 

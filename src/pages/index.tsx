@@ -32,9 +32,9 @@ export default function Home(props:{children: ReactNode}) {
   
   return (
       <main
-        className={` p-10 h-screen ${inter.className} `}
+        className={` p-10 h-full ${inter.className} `}
       >
-        <div className=' w-full h-screen'>
+        <div className=' w-full h-full'>
             <h2 className='font-bold text-xl font-roboto'>NOW SHOWING</h2>
                 <Suspense fallback={<Loading/>}>
                   <NowShowing/>

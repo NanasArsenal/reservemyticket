@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { useMovieContext } from '@/context/MovieContext';
 import { useState } from 'react';
 import { Movie } from '.';
-import { Pane, Dialog } from 'evergreen-ui';
+import { Pane, Dialog, SelectField, TextInput, Button} from 'evergreen-ui';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 const MovieDetails = () => {
@@ -21,6 +23,38 @@ const MovieDetails = () => {
     "createdDate": "2023-09-18T14:46:12.985Z",
     "showDate": "23rd december 2023",  });
   const [isShown,setIsShown]=useState<boolean>(false);
+  // const [payload ,setPayload] = useState({
+  //   _id: data._id,
+  //   quantityPurchased: 0,
+  //   email:"",
+  //   phoneNumber:"",
+  //   viewDate:"",
+  //   viewTime:""}
+  //  )
+  const [phoneNumber, setPhoneNumber]=  useState<String>("");
+  const [email,setEmail]= useState<String>("");
+  const [quantityPurchased, setQuantityPurchased] = useState(0);
+  const [viewDate,setViewDate] = useState<String>("");
+  const [viewTime, setViewTime] = useState<String>("");
+
+  const BookTicket = (payload:any)=>{
+    axios.post('https://ticketreservationserver-production.up.railway.app/bookings', payload).then((res)=>{
+      console.log(res);
+      if(res.status == 200){
+        Swal.fire(
+          'Great News!!',
+          'Your ticket has been booked successfully',
+          'success'
+        );
+
+        setIsShown(!isShown);
+      }
+    }).catch((error)=>{
+      console.log(error);
+    })
+
+  }
+
 
   useEffect(() => {
     
@@ -29,6 +63,8 @@ const MovieDetails = () => {
 
   },[movie])
   console.log('movie',data)
+
+
 
 
 
@@ -70,6 +106,7 @@ const MovieDetails = () => {
       <Pane>
       <Dialog
         isShown={isShown}
+        width={"60%"}
         title="Book Ticket"
         containerProps={
           {
@@ -79,8 +116,87 @@ const MovieDetails = () => {
         onCloseComplete={() => setIsShown(false)}
         hasFooter={false}
         confirmLabel="Custom Label"
+        
       >
-        <h1 className='text-blue-500'>Book Ticket</h1>
+        
+        <form action="" className=' justify-evenly h-full py-3'>
+          <div className='input-wrapper grid grid-cols-1 md:grid-cols-2  gap-2 text-blue-400 text-sm'>
+              <div className='flex flex-col'>
+                <label htmlFor="email">Email</label>
+                <TextInput name="text-input-name"  placeholder="Email" className='w-fit' onChange={(e:any)=>{
+                  setEmail( e.target.value)  
+                  console.log(e.currentTarget.value);
+                }}/>
+              </div>
+
+              <div className='flex flex-col'>
+                <label htmlFor="email">Phone Number</label>
+                <TextInput name="text-input-name"  placeholder="phone" className='w-fit' onChange={(e:any)=>{
+                  setPhoneNumber( e.target.value)  
+                  console.log(e.currentTarget.value);
+                }}/>
+              </div>
+            
+              <div className='flex flex-col'>
+                <label htmlFor="email">Number of Tickets</label>
+                <TextInput name="text-input-name" type='number' placeholder="Number of tickets" className='w-fit' onChange={(e:any)=>{
+                  setQuantityPurchased(e.target.value)  
+                  console.log(e.currentTarget.value);
+                }}/>
+              </div>
+
+              <div className='flex flex-col'>
+                  <label htmlFor="view-date">View Date</label>
+                  <TextInput name="date" type='date' onChange={(e:any)=>{
+                    setViewDate(e.target.value);
+                    console.log(e.target.value)
+                  }} />
+              </div>
+              
+              <div className='flex flex-col'>
+                <label htmlFor="view-time">Choose View Time</label>
+                <SelectField
+                  width={280}
+                  onChange={(e:any)=>{
+                    setViewTime(e.target.value)
+                    console.log(e.target.value);
+                  }}
+                >
+                  <option value={""} selected>
+                    Select
+                  </option>
+                  <option value={"5:00pm"} >
+                    5:00pm
+                  </option>
+                  <option value="7:00pm">
+                    7:00pm
+                  </option>
+                  <option value="9:00pm">
+                    9:00pm
+                  </option>
+                  <option value="11:00pm">
+                    11:00pm
+                  </option>
+                </SelectField>
+              </div>
+              
+          </div>
+          
+
+          <div className='w-full flex justify-center'>
+            <Button appearance='primary' width={240} onClick={(e:React.MouseEvent) =>{
+              e.preventDefault()
+              BookTicket({
+                _id: data._id,
+                email: email,
+                quantityPurchased: quantityPurchased,
+                phoneNumber: phoneNumber,
+                viewDate: viewDate,
+                viewTime: viewTime,
+              })
+              }}>Book</Button>
+          </div>
+        </form>
       </Dialog>
     </Pane>
 
